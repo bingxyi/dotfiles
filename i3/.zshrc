@@ -273,4 +273,4 @@ myip() {
 }
 
 # Prompt no estilo Kali com cores e ícone de rede
-PROMPT=$'%F{blue}┌──(%F{magenta}%n%F{blue}㉿%F{magenta}%m%F{blue})-[%F{green}%~%F{blue}]\n└─🌐[%F{red}$(myip)%F{blue}]$ %f'
+PROMPT=$'%F{blue}┌──(%F{magenta}%n%F{blue}㉿%F{magenta}%m%F{blue})-[%F{green}%~%F{blue}]\n└─🌐[%F{red}$(myip)%F{blue}]~$ %f'
