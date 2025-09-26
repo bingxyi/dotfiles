@@ -15,8 +15,6 @@ dotfiles
 ├── nvim/         # Neovim configs
 ├── rofi/         # Rofi themes and configs
 ├── .zshrc        # Main Zsh config
-├── git_key       # Private key (do not use publicly!)
-├── git_key.pub   # Public key (example)
 └── README.md     # This file
 ```
 
