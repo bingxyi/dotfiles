@@ -61,7 +61,7 @@ ln -sf ~/dotfiles/.zshrc ~/.zshrc
 
 ##### Install them all at once (Debian/Ubuntu/Kali/etc):
 ```bash
-sudo apt install i3 i3blocks rofi neovim zsh git -y
+sudo apt install i3 i3blocks rofi neovim git -y
 ```
 
 
