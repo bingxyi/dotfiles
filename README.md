@@ -56,7 +56,6 @@ ln -sf ~/dotfiles/.zshrc ~/.zshrc
 - i3blocks
 - rofi
 - neovim
-- zsh
 - git
 
 ##### Install them all at once (Debian/Ubuntu/Kali/etc):
