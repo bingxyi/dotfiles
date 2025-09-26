@@ -23,11 +23,11 @@ dotfiles
 
 ## 🛠️ Tools Used
 
-[i3WM](https://i3wm.org/) → Minimal and highly customizable Window Manager
-[i3Blocks](https://vivien.github.io/i3blocks/) → Modular status bar for i3
-[nvim](https://neovim.io/) → Optimized and extensible text editor
-[Rofi](https://neovim.io/) → Lightweight app launcher and dmenu replacement
-[zsh](https://www.zsh.org/) → Plugins and themes of shell
+- [i3WM](https://i3wm.org/) → Minimal and highly customizable Window Manager
+- [i3Blocks](https://vivien.github.io/i3blocks/) → Modular status bar for i3
+- [nvim](https://neovim.io/) → Optimized and extensible text editor
+- [Rofi](https://neovim.io/) → Lightweight app launcher and dmenu replacement
+- [zsh](https://www.zsh.org/) → Plugins and themes of shell
 
 ## 🎨 Preview
 i3wm + i3blocks
