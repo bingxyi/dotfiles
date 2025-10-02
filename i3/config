@@ -12,11 +12,10 @@
 set $mod Mod4
 # set $ex exec --no-startup-id
 # set $sc /home/bingxyi/scripts/rofi-duskfox.sh
-exec --no-startup-id picom --config ~/.config/picom/picom.conf &
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:System San Francisco Display 10
+font pango:JetBrainsMono Nerd Font 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -37,12 +36,12 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym $mod+XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym $mod+XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# dunst para popup
+exec --no-startup-id dunst
+# Volume com popup
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/volume.sh up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/volume.sh down
+bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/volume.sh mute
 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -53,22 +52,25 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty -1
 
 # Start touchpad
 exec_always xinput set-prop "VEN_27C6:00 27C6:0D43 Touchpad" "libinput Tapping Enabled" 1
+exec_always xinput set-prop "VEN_27C6:00 27C6:0D43 Touchpad" "libinput Natural Scrolling Enabled" 1
 
 # Kill focused window
 bindsym $mod+Shift+q kill
 
 # Start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show drun 
+bindsym $mod+d exec rofi -show drun
+
+# Controle de brilho
+bindsym F6 exec --no-startup-id brightnessctl set 5%-
+bindsym F7 exec --no-startup-id brightnessctl set +5%
 
 # PrintScreen
 bindsym --release F10 exec flameshot gui 
 
-# Web search
-bindsym $mod+m $ex rofi -p "Search:" | xargs -r firefox -new-tab "https://duckduckgo.com/?q=" 
 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -130,9 +132,9 @@ bindsym $mod+a focus parent
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:    "
 set $ws2 "2:    "
-set $ws3 "3:    "
-set $ws4 "4:    "
-set $ws5 "5:    "
+set $ws3 "3:    "
+set $ws4 "4:  󰷈  "
+set $ws5 "5:    "
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -163,11 +165,17 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-exec --no-startup-id i3-msg 'workspace 2:    ; exec firefox-esr'
-assign [class="firefox-esr"] $ws2
+exec --no-startup-id i3-msg 'workspace 2:    ; exec firefox'
 
-exec --no-startup-id i3-msg 'workspace 3:    ;  exec obsidian'
-assign [class="obsidian"] $ws3
+assign [class="firefox"] $ws2
+
+exec --no-startup-id i3-msg 'workspace 3:    ; exec spotify'
+
+assign [class="Spotify"] $ws3
+
+exec --no-startup-id i3-msg 'workspace 4:  󰷈  ; exec obsidian'
+
+assign [class="obsidian"] $ws4
 
 
 # reload the configuration file
@@ -212,35 +220,32 @@ bindsym $mod+r mode "resize"
 # for_window [class=".*"] border pixel 2
 
 # Janelas focadas
-client.focused          #bb9af7 #1e1e2e #bb9af7 #c8c8c8
+client.focused          #d79921 #282828 #d79921 #ebdbb2
 # Janelas focadas mas inativas
-client.focused_inactive #565f89 #1e1e2e #565f89 #c8c8c8
-# Janelas não focadas
-client.unfocused        #565f89 #1e1e2e #565f89 #c8c8c8
-# Janelas urgentes
-client.urgent           #f7768e #1e1e2e #f7768e #c8c8c8
+client.focused_inactive #3c3836 #282828 #3c3836 #a89984
+# Janela desfocada
+client.unfocused        #3c3836 #282828 #3c3836 #a89984
+# Urgente
+client.urgent           #cc241d #282828 #cc241d #fbf1c7
 
 hide_edge_borders both
 
-client.background       #1e1e2e
+client.background       #282828
 
 # Task bar
 bar {
-	
-	font pango:FiraCode Nerd Font 10
-	#font pango:DejaVu Sans Mono, FontAwesome 10
-	status_command i3blocks
+   font pango:JetBrainsMono Nerd Font 10
+   status_command i3blocks
 
     colors {
-        background #1e1e2e      # fundo da barra (duskfox)
-        statusline #c8c8c8      # texto da barra normal
-        separator  #565f89      # separadores
+        background #282828
+        statusline #ebdbb2
+        separator  #a89984
 
-        # Workspaces
-        focused_workspace  #bb9af7 #1e1e2e #bb9af7   
-        active_workspace   #c8c8c8 #1e1e2e #c8c8c8   
-        inactive_workspace #8888ff #1e1e2e #565f89   
-        urgent_workspace   #f7768e #1e1e2e #f7768e   
+        focused_workspace  #d79921 #282828 #d79921
+        active_workspace   #ebdbb2 #282828 #ebdbb2
+        inactive_workspace #a89984 #282828 #a89984
+        urgent_workspace   #cc241d #282828 #cc241d
     }
 }
 
@@ -251,5 +256,4 @@ bindsym $mod+l exec i3lock
 bindsym $mod+Shift+Ctrl+Z exec systemctl poweroff
 
 # Display wallpaper
-exec_always feh --bg-fill /usr/share/backgrounds/kali/kali-legacy-16x9.png
-
+exec_always feh --bg-fill # Path/To/Wallpaper
