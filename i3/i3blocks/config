@@ -1,0 +1,59 @@
+command=$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+###########################
+# BLOCO: VOLUME
+###########################
+[volume]
+command=pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print $5}'
+interval=1
+label=
+
+###########################
+# BLOCO: BRILHO
+###########################
+[brightness]
+label=💡 BRI:
+command=sh -c 'cur=$(brightnessctl g); max=$(brightnessctl m); echo $((cur * 100 / max))%'
+interval=5
+
+###########################
+# BLOCO: MEMÓRIA
+###########################
+[memory]
+label=🐏 RAM:
+command=~/.config/i3blocks/memory
+interval=10
+
+###########################
+# BLOCO: IP / VPN
+###########################
+[ip]
+label=🌐 IP:
+command=bash -c 'if ip a | grep -q tun0; then echo "VPN $(curl -s ifconfig.me)"; else hostname -I | awk "{print \$1}"; fi'
+interval=20
+
+###########################
+# BLOCO: CPU
+###########################
+[cpu]
+label=🖥️ CPU:
+command=~/.config/i3blocks/cpu_usage
+interval=5
+
+###########################
+# BLOCO: BATERIA
+###########################
+[battery]
+label=🔋 BAT:
+command=~/.config/i3blocks/battery
+interval=30
+
+###########################
+# BLOCO: DATA
+###########################
+[date]
+label=📅
+command=date '+%d/%m/%Y %H:%M'
+interval=60
